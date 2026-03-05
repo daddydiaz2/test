@@ -13,6 +13,18 @@ export FNM_PATH="$HOME/.local/share/fnm"
 export PATH="$FNM_PATH:$PATH"
 eval "$(fnm env --use-on-cd)"
 
+echo "==> Agregando fnm al .bashrc..."
+if ! grep -q "fnm env" ~/.bashrc; then
+  echo '' >> ~/.bashrc
+  echo '# fnm' >> ~/.bashrc
+  echo 'export FNM_PATH="$HOME/.local/share/fnm"' >> ~/.bashrc
+  echo 'export PATH="$FNM_PATH:$PATH"' >> ~/.bashrc
+  echo 'eval "$(fnm env --use-on-cd)"' >> ~/.bashrc
+  echo "  -> fnm agregado al .bashrc"
+else
+  echo "  -> fnm ya estaba en .bashrc, omitiendo"
+fi
+
 echo "==> Instalando Node 22..."
 fnm install 22
 fnm use 22
